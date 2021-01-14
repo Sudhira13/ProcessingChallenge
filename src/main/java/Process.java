@@ -1,7 +1,6 @@
 import processing.core.PApplet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Process extends PApplet{
@@ -9,7 +8,10 @@ public class Process extends PApplet{
     public static final int WIDTH = 640;
     public static final int HEIGHT = 480;
     public static final int DIAMETER = 30;
-    List <Integer> speed = new ArrayList<>(Arrays.asList(0,0,0,0));
+    public static final int TOTAL_BALLS = 4;
+    public List<Ball> balls = new ArrayList<>();
+
+    int xPosition = 0;
 
     public static void main(String[] args) {
        PApplet.main("Process",args);
@@ -23,20 +25,14 @@ public class Process extends PApplet{
 
     @Override
     public void setup() {
+        for(int ballNumber = 1; ballNumber <= TOTAL_BALLS; ballNumber++) {
+            Ball ball = new Ball(xPosition, ((ballNumber * HEIGHT) / 5f), ballNumber, DIAMETER);
+            balls.add(ball);
+        }
     }
 
     @Override
     public void draw() {
-        for (int ballNumber = 1; ballNumber <= 4; ballNumber++) {
-            BallCount ballCount = new BallCount(HEIGHT,ballNumber,speed);
-            float yCoord = ballCount.getHEIGHT();
-            int xCoord = ballCount.getX();
-            drawCircle(xCoord,yCoord,ballCount);
-        }
-    }
-
-    public void drawCircle(int x,float y,BallCount ballCount){
-        ellipse(x,y,DIAMETER,DIAMETER);
-        ballCount.setX();
+       balls.forEach(ball -> {ball.drawCircle(this);});
     }
 }
