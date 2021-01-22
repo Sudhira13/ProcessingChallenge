@@ -1,3 +1,5 @@
+package processing;
+
 import processing.core.PApplet;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ public class Process extends PApplet{
     int xPosition = 0;
 
     public static void main(String[] args) {
-       PApplet.main("Process",args);
+       PApplet.main("processing.Process",args);
     }
 
     @Override
